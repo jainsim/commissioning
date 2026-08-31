@@ -1,5 +1,6 @@
 import { useCallback, useState } from 'react'
 import { useRoute } from './lib/router'
+import { Shell } from './components/Shell'
 import type { Owner, StationResult } from './lib/api'
 import { Home } from './screens/Home'
 import { Scan } from './screens/Scan'
@@ -85,5 +86,9 @@ export default function App() {
     }
   }
 
-  return <div className="phone">{screen}</div>
+  return (
+    <Shell>
+      <div className="phone">{screen}</div>
+    </Shell>
+  )
 }

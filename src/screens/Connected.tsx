@@ -11,7 +11,7 @@ export function Connected() {
   return (
     <>
       <TopBar title="Express Plus Setup" showBack={false} />
-      <div className="body">
+      <div className="body stack">
         <div className="centre">
           <div className="bigcheck"><Check size={52} strokeWidth={3} /></div>
           <h3 className="title">Device connected</h3>

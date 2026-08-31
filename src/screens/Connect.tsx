@@ -14,7 +14,7 @@ export function Connect() {
   return (
     <>
       <TopBar title="Express Plus Setup" />
-      <div className="body">
+      <div className="body stack">
         <Notice
           icon={<Bluetooth size={26} />}
           title="Stay within range"

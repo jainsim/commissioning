@@ -323,10 +323,14 @@ p.lede {
 .spinner.sm { width: 26px; height: 26px; border-width: 3px; margin: 0; }
 @keyframes spin { to { transform: rotate(360deg) } }
 
+.body.stack { display: flex; flex-direction: column; }
+.body.stack > * { flex: 0 0 auto; }
+
 .centre {
   display: flex; flex-direction: column; justify-content: center;
-  min-height: 100%;
-  padding: 30px 4px;
+  flex: 1 1 auto;
+  min-height: 0;
+  padding: 24px 4px;
 }
 
 /* ---------- photo capture ---------- */
@@ -506,3 +510,87 @@ p.lede {
 .dsection:first-child { margin-top: 4px; }
 .photostrip { width: 100%; border-radius: var(--radius); overflow: hidden; border: 1px solid var(--line); }
 .caption { font-size: 15px; color: var(--ink-2); margin: 8px 0 0; }
+
+/* ---------- desktop shell ---------- */
+
+/* Mobile first: no frame, no panel, the app owns the screen. */
+.stage { height: 100%; }
+.brief { display: none; }
+.device, .device-frame { height: 100%; }
+
+@media (min-width: 900px) {
+  body { background: #EEF1F5; }
+
+  .stage {
+    display: grid;
+    grid-template-columns: minmax(320px, 460px) auto;
+    gap: 64px;
+    align-items: center;
+    justify-content: center;
+    padding: 48px;
+    height: 100%;
+    overflow-y: auto;
+  }
+
+  .brief { display: block; max-width: 460px; }
+
+  .brief-brand {
+    display: flex; align-items: center; gap: 9px;
+    font-size: 18px; font-weight: 750; letter-spacing: -0.02em;
+    margin-bottom: 26px;
+  }
+  .brief-brand .mark { color: var(--blue); display: grid; place-items: center; }
+
+  .brief h1 {
+    margin: 0 0 14px;
+    font-size: 44px; line-height: 1.08;
+    font-weight: 700; letter-spacing: -0.035em;
+  }
+  .brief-lede { margin: 0 0 34px; font-size: 19px; color: var(--ink-2); max-width: 42ch; }
+
+  .brief h2 {
+    margin: 0 0 12px;
+    font-size: 13px; font-weight: 700;
+    letter-spacing: 0.09em; text-transform: uppercase; color: var(--ink-2);
+  }
+  .brief ol { margin: 0 0 32px; padding-left: 20px; color: var(--ink); }
+  .brief ol li { margin-bottom: 9px; font-size: 16px; }
+  .brief > p { font-size: 16px; color: var(--ink-2); margin: 0 0 32px; max-width: 46ch; }
+
+  .brief-foot {
+    font-size: 14px !important;
+    color: #7C8794 !important;
+    border-top: 1px solid #DCE2E9;
+    padding-top: 18px;
+    margin-bottom: 0 !important;
+  }
+
+  /* The bezel. Deliberately plain: a thick dark border and a soft shadow read
+     as "phone" without a fake notch or a drawn hardware button. */
+  .device { height: auto; display: grid; place-items: center; }
+  .device-frame {
+    width: 390px;
+    height: 800px;
+    max-height: calc(100vh - 96px);
+    background: #262C34;
+    border-radius: 42px;
+    padding: 12px;
+    box-shadow: 0 32px 70px -20px rgba(11,15,20,.42), 0 4px 14px rgba(11,15,20,.14);
+    overflow: hidden;
+  }
+  .device-frame .phone { border-radius: 30px; max-width: none; }
+}
+
+/* Between 900 and 1180px the two columns still fit, but only if the device
+   shrinks. Stacking them here would push the app below the fold and leave a
+   laptop visitor looking at a wall of text, which is the opposite of the point. */
+@media (min-width: 900px) and (max-width: 1180px) {
+  .stage { grid-template-columns: minmax(280px, 1fr) 336px; gap: 36px; padding: 32px; }
+  .brief h1 { font-size: 34px; }
+  .brief-lede { font-size: 17px; margin-bottom: 26px; }
+  .brief ol { margin-bottom: 24px; }
+  .brief ol li, .brief > p { font-size: 15px; }
+  .brief > p { margin-bottom: 24px; }
+  .device-frame { width: 336px; height: 720px; border-radius: 36px; padding: 10px; }
+  .device-frame .phone { border-radius: 27px; }
+}
