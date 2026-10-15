@@ -47,6 +47,7 @@ export function DeviceSetup({
   }
 
   const doneCount = REQUIRED.filter((k) => done[k]).length
+  const allDone = STEPS.filter((s) => done[s.key]).length
   const ready = doneCount === REQUIRED.length
   const remaining = REQUIRED.filter((k) => !done[k])
     .map((k) => STEPS.findIndex((s) => s.key === k) + 1)
@@ -60,16 +61,25 @@ export function DeviceSetup({
   return (
     <>
       <TopBar title="Express Plus · MAC …321" />
-      <div className="body">
+
+      {/* Static header: title, lede and the step progress stay pinned while the
+          step list below scrolls. */}
+      <div className="setup-head">
         <h3 className="title">Device details</h3>
         <p className="lede">Complete the following steps</p>
 
         <div className="progresshead">
-          <span>Required steps</span>
-          <span>{doneCount} of {REQUIRED.length}</span>
+          <span>Steps</span>
+          <span>{allDone}/{STEPS.length}</span>
         </div>
-        <div className="track"><i style={{ width: `${(doneCount / REQUIRED.length) * 100}%` }} /></div>
+        <div className="stepper">
+          {STEPS.map((s) => (
+            <span key={s.key} className={`seg ${done[s.key] ? 'on' : ''}`} />
+          ))}
+        </div>
+      </div>
 
+      <div className="body">
         {STEPS.map((s, i) => {
           const isDone = done[s.key]
           return (
