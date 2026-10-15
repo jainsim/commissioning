@@ -11,15 +11,6 @@ import { Zap } from 'lucide-react'
   about the app itself changes: this is a wrapper, not a second layout.
 */
 
-const STEPS = [
-  'Tap Install. The scanner finds a code after a moment.',
-  'Wait for the Bluetooth link, then continue to setup.',
-  'Add each required step. The button unlocks when all three are done.',
-  'Complete device setup. One of the three stations fails on purpose.',
-  'Remove the failed one, then complete setup.',
-  'Add owner details, or skip to see the other ending.',
-]
-
 export function Shell({ children }: { children: ReactNode }) {
   return (
     <div className="stage">
@@ -29,26 +20,36 @@ export function Shell({ children }: { children: ReactNode }) {
           Northbeam
         </div>
 
-        <h1>Field commissioning</h1>
-        <p className="brief-lede">
-          A working prototype of the flow an electrician follows to commission an EV charging
-          station on site. Built in code, not clickable screens.
+        <h1>A coded prototype of an app for installing a charging station.</h1>
+        <p className="brief-note">
+          Northbeam is a fictional brand and all station data is invented. Not shipped work.
         </p>
 
-        <h2>Try it</h2>
-        <ol>
-          {STEPS.map((s) => <li key={s}>{s}</li>)}
-        </ol>
-
-        <h2>Built with</h2>
+        <h2>Why I built it</h2>
         <p>
-          React, TypeScript and Vite. Hand-written service worker so it loads without a
-          connection. No backend: a mock API with artificial latency drives the waiting and
-          failure states.
+          Electricians work with gloves, glare and weak signal. I wanted to know what AI
+          prototyping can do for a flow like that: it built the screens fast, but waiting and
+          failure states still needed my design judgment.
         </p>
 
-        <p className="brief-foot">
-          Prototype by Seema Jain. Northbeam is a fictional brand and all station data is invented.
+        <h2>The flow</h2>
+        <ul>
+          <li>Scan and pair</li>
+          <li>Required steps gate</li>
+          <li>Failure and recovery</li>
+          <li>Owner details or skip</li>
+        </ul>
+
+        <h2>Design decisions I would make for the product</h2>
+        <ul>
+          <li>A progress bar: it shows how many steps exist, how many are done and how many are left.</li>
+          <li>Offline sync: stations commission without signal and sync to ChargePoint when it returns.</li>
+        </ul>
+
+        <h2>What I learned</h2>
+        <p>
+          A coded prototype exposes gaps a clickable flow hides, like the failed station and the
+          offline case.
         </p>
       </aside>
 

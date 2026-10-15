@@ -588,14 +588,16 @@ p.lede {
   }
   .brief-lede { margin: 0 0 34px; font-size: 19px; color: var(--ink-2); max-width: 42ch; }
 
+  /* Section headings match the portfolio's heading-md (not an eyebrow). */
   .brief h2 {
-    margin: 0 0 12px;
-    font-size: 13px; font-weight: 700;
-    letter-spacing: 0.09em; text-transform: uppercase; color: var(--ink-2);
+    margin: 0 0 10px;
+    font-size: 20px; line-height: 28px; font-weight: 600;
+    letter-spacing: -0.4px; color: var(--ink);
   }
-  .brief ol { margin: 0 0 32px; padding-left: 20px; color: var(--ink); }
-  .brief ol li { margin-bottom: 9px; font-size: 16px; }
+  .brief ol, .brief ul { margin: 0 0 32px; padding-left: 20px; color: var(--ink); }
+  .brief ol li, .brief ul li { margin-bottom: 9px; font-size: 16px; }
   .brief > p { font-size: 16px; color: var(--ink-2); margin: 0 0 32px; max-width: 46ch; }
+  .brief .brief-note { font-size: 14px; color: #7C8794; margin: 0 0 30px; max-width: 46ch; }
 
   .brief-foot {
     font-size: 14px !important;
@@ -628,8 +630,8 @@ p.lede {
   .stage { grid-template-columns: minmax(280px, 1fr) 336px; gap: 36px; padding: 32px; }
   .brief h1 { font-size: 34px; }
   .brief-lede { font-size: 17px; margin-bottom: 26px; }
-  .brief ol { margin-bottom: 24px; }
-  .brief ol li, .brief > p { font-size: 15px; }
+  .brief ol, .brief ul { margin-bottom: 24px; }
+  .brief ol li, .brief ul li, .brief > p { font-size: 15px; }
   .brief > p { margin-bottom: 24px; }
   .device-frame { width: 336px; height: 720px; border-radius: 36px; padding: 10px; }
   .device-frame .phone { border-radius: 27px; }
