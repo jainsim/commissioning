@@ -11,6 +11,10 @@ const DOCS = [
 
 type Net = 'offline' | 'syncing' | 'online' | 'hidden'
 
+// Remembers, for this page session, that the user has started the flow, so the
+// "this is tappable" pulse on Install only runs until the first interaction.
+let engaged = false
+
 export function Home({ onStart }: { onStart: () => void }) {
   // Scripted connectivity demo: the prototype starts offline, syncs, comes back
   // online, then the banner clears. It auto-plays once on load rather than
@@ -27,6 +31,16 @@ export function Home({ onStart }: { onStart: () => void }) {
 
   // Until the queued changes are synced, the device only has its cached files.
   const offline = net === 'offline' || net === 'syncing'
+
+  // Pulse the Install tile until the user taps a task tile, so it reads as a
+  // live prototype rather than a static screenshot.
+  const [hint, setHint] = useState(!engaged)
+  const start = () => {
+    engaged = true
+    setHint(false)
+    onStart()
+    go('/scan')
+  }
 
   return (
     <>
@@ -66,11 +80,11 @@ export function Home({ onStart }: { onStart: () => void }) {
       <div className="body">
         <h2 className="section">Tasks</h2>
         <div className="tiles">
-          <button className="tile" onClick={() => { onStart(); go('/scan') }}>
+          <button className={`tile${hint ? ' hint' : ''}`} onClick={start}>
             <span className="ring"><Plus size={30} /></span>
             Install
           </button>
-          <button className="tile" onClick={() => { onStart(); go('/scan') }}>
+          <button className="tile" onClick={start}>
             <span className="ring"><Wrench size={28} /></span>
             Service
           </button>
