@@ -13,7 +13,7 @@
   forever. Bump it on every deploy.
 */
 
-const CACHE_VERSION = 'commissioning-v6'
+const CACHE_VERSION = 'commissioning-v7'
 
 /*
   Install: pre-cache the app shell.

@@ -100,6 +100,12 @@ button { font: inherit; color: inherit; }
 
 .body.flush { padding: 0; }
 
+/* Hide browser scrollbars in the showcase: the app body and the desktop
+   write-up still scroll by wheel/touch, but a device preview shouldn't show a
+   scrollbar (and a phone never does). */
+.body, .stage { scrollbar-width: none; -ms-overflow-style: none; }
+.body::-webkit-scrollbar, .stage::-webkit-scrollbar { width: 0; height: 0; display: none; }
+
 /* Actions pinned to the bottom third, inside the thumb arc. */
 .footer {
   flex: 0 0 auto;
@@ -567,6 +573,48 @@ p.lede {
 .stage { height: 100%; }
 .brief-head, .brief { display: none; }
 .cols, .device, .device-frame { height: 100%; }
+
+/* Mobile home only: a single scrolling column — header, then the live
+   prototype, then the write-up. Inside the flow the app stays full-screen. */
+@media (max-width: 899px) {
+  .stage.home { height: auto; min-height: 100%; background: #fafafa; }
+
+  .stage.home .brief-head { display: block; padding: 22px 20px 6px; }
+  .stage.home .brief-brand {
+    display: flex; align-items: center; gap: 9px;
+    font-size: 17px; font-weight: 750; letter-spacing: -0.02em; margin-bottom: 14px;
+  }
+  .stage.home .brief-brand .mark { color: var(--blue); display: grid; place-items: center; }
+  .stage.home .brief-head h1 {
+    margin: 0 0 10px; font-size: 30px; line-height: 1.12;
+    font-weight: 700; letter-spacing: -0.025em;
+  }
+  .stage.home .brief-head .brief-note { font-size: 14px; color: #7C8794; margin: 0; }
+
+  .stage.home .cols {
+    display: flex; flex-direction: column; gap: 24px;
+    height: auto; padding: 20px;
+  }
+  .stage.home .device { order: -1; height: auto; }
+  .stage.home .device-frame {
+    height: min(680px, 78vh); width: 100%; max-width: 440px; margin: 0 auto;
+    background: var(--white); border: 1px solid var(--line); border-radius: 20px;
+    box-shadow: 0 10px 30px -14px rgba(11,15,20,.25); overflow: hidden;
+  }
+  .stage.home .device-frame .phone { border-radius: 20px; max-width: none; }
+
+  .stage.home .brief { display: block; }
+  .stage.home .brief h2 {
+    margin: 0 0 8px; font-size: 19px; font-weight: 600;
+    letter-spacing: -0.3px; color: var(--ink);
+  }
+  .stage.home .brief > p { font-size: 16px; color: var(--ink-2); margin: 0 0 22px; }
+  .stage.home .brief ul { margin: 0 0 22px; padding-left: 20px; color: var(--ink); }
+  .stage.home .brief li { margin-bottom: 8px; font-size: 16px; }
+  .stage.home .brief > :last-child { margin-bottom: 0; }
+  .stage.home .brief-head h1, .stage.home .brief h2,
+  .stage.home .brief p, .stage.home .brief li { text-wrap: pretty; }
+}
 
 @media (min-width: 900px) {
   body { background: #fafafa; }
