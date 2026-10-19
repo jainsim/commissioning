@@ -569,6 +569,9 @@ p.lede {
 
 /* ---------- desktop shell ---------- */
 
+/* Embedded in the portfolio case study: just the app, filling the frame. */
+.embed { height: 100%; }
+
 /* Mobile first: no frame, no panel, the app owns the screen. */
 .stage { height: 100%; }
 .brief-head, .brief { display: none; }

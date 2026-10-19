@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react'
 import { Zap } from 'lucide-react'
+import { useRoute } from '../lib/router'
 
 /*
   Desktop presentation only.
@@ -12,8 +13,19 @@ import { Zap } from 'lucide-react'
 */
 
 export function Shell({ children }: { children: ReactNode }) {
+  // On a phone, the write-up only wraps the landing screen; once the flow
+  // starts the app takes the full screen as normal.
+  const isHome = useRoute() === '/'
+
+  // Embedded in the portfolio case study (?embed=1): render just the app, with
+  // no write-up — the portfolio page carries the context instead.
+  const embedded =
+    typeof window !== 'undefined' &&
+    new URLSearchParams(window.location.search).has('embed')
+  if (embedded) return <div className="embed">{children}</div>
+
   return (
-    <div className="stage">
+    <div className={`stage${isHome ? ' home' : ''}`}>
       <header className="brief-head">
         <div className="brief-brand">
           <span className="mark"><Zap size={20} fill="currentColor" /></span>
