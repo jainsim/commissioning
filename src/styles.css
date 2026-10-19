@@ -600,7 +600,7 @@ p.lede {
 
   .cols {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) 360px;
+    grid-template-columns: minmax(0, 1fr) auto;
     gap: 56px;
     align-items: start;
     height: auto;
@@ -629,10 +629,13 @@ p.lede {
     position: sticky; top: 56px; align-self: start;
     height: auto; display: grid; place-items: center;
   }
+  /* Responsive, but proportional: scale with the available height so short
+     laptop screens shrink the phone instead of squashing its aspect ratio,
+     and it never jumps between fixed breakpoint sizes. Capped at 360x740. */
   .device-frame {
-    width: 360px;
-    height: 740px;
-    max-height: calc(100vh - 112px);
+    --dh: min(740px, calc(100dvh - 112px));
+    height: var(--dh);
+    width: calc(var(--dh) * 360 / 740);
     background: #262C34;
     border-radius: 40px;
     padding: 11px;
